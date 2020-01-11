@@ -1,0 +1,128 @@
+<?php
+
+$con = mysqli_connect("localhost","root","webdev", "salon");
+
+mysqli_select_db($con, "salon");
+
+$name =  (isset($_POST['name']) ? $_POST['name'] : '');
+$email= (isset($_POST['email']) ? $_POST['email'] : '');
+$bookingdate = (isset($_POST['bookingdate']) ? $_POST['bookingdate'] : '');
+$submit = (isset($_POST['submit']) ? $_POST['submit'] : '');
+ 
+$sql="INSERT INTO salon (name, email, bookingdate) VALUES (?,?,?)";
+$stmt = mysqli_prepare($con, $sql);
+$stmt->bind_param("sss", $_POST['name'], $_POST['email'], $_POST['bookingdate']);
+$stmt->execute();
+
+mysqli_close($con)
+
+?>
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+	   <title>  Amina Perva arts</title>
+	     <link rel="stylesheet" type="text/css" href="studiodesign.css">
+  </head>
+  <body> 
+    <h1>
+	   <i>Amina Perva Arts</i>
+    </h1>
+
+<div class="menu">
+  <table class="menubar">
+    <tr>
+       <td>
+        <a href="#abtowner">About the owner</a>
+      </td>
+      <td>
+         <a href="#works">Previous works</a>
+      </td>
+      <td>
+        <a href="#eyes">Eyes</a>
+      </td>
+      <td>
+         <a href="#contact">Contact</a>
+      </td>
+    </tr>
+  </table>
+</div>     
+
+<img class="profileimage" src="profile.jpg">
+  	
+<div class=intro id="abtowner">
+  <h3 class="about"> <i>About the owner</i> </h3>
+  <hr>
+ 		<br><br>
+         	 I'm an extrovert who enjoys being the center of attention. I've been involved with the scene since I was a kid
+        an eight year old piano and concerts are an integral part of me. I always knew I was going to do something related
+        for the media, I volunteered at news agencies, broadcasters, building my own path. For myself
+        I can say that I am an ambitious, persistent, dynamic, hardworking and dedicated person. Also, I always do
+        more than one thing at a time and working under stressful situations is no problem for me. I think it is
+        Multitasking in the world of journalism is crucial. I have excellent communication skills and have been successful
+        establishing communication with people helped me achieve my goals. I consider myself
+        a versatile person who knows many spheres in life, of course, I study every day until death.
+        I think I have reached my maximum in gaining knowledge and I love to work. I can say I own it
+        a competitive spirit within myself that gives me impetus to work. My experiences in schooling, working and volunteering are
+        helped me find myself and formed part of my personality. I love challenges and I view every success as
+        motivation to achieve the goals I set for myself. <br><br>
+</div>
+
+<div class="art" id="works">
+ <h3 class="works"> <strong>  Previous works</strong></h3>
+
+     <img src="work9.png"  > 
+     <img src="work8.jpg" class="work8">
+     <img src="work1.jpg">
+
+  <p class="message"> If you want to become one of our happy clients, visit us soon! </p>
+</div>
+
+
+<div class="eyeart" id="eyes">
+ <h3 class="eyes"> <strong>  Eyes </strong></h3>
+   
+     <img src="work2.png" class="work2" > 
+     <img src="work3.png" class="work3">
+     <img src="work4.png"class="work4">
+</div>
+
+<p class="discount"> Don't miss special discount for winter holidays.</p> 
+
+<div class="work6"><img src="work6.png"></div> 
+
+<input type="button" name="answer" value="BOOK YOUR APPOITMENT NOW" onclick="showBooking()" />
+
+<div id="booking"  style="display:none;" class="booking" > 
+    <form class="inputs" action="salon.php" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Example: Amina Perva">
+
+                <label for="email">Surname:</label>
+                <input type="text" id="email" name="email" placeholder="Example: namesurname@outlook.com">
+
+                <label for="bookingdate">Enter date when you want to come and we will contact you:</label>
+                <input type="text" name="bookingdate" placeholder="dd/mm/yyyy"></textarea>
+              
+                <input type="submit" value="Submit">
+            </form>
+
+</div>
+<script >
+function showBooking() {
+   document.getElementById('booking').style.display = "block";
+}
+</script>
+ 
+
+<div class="contact"> 
+    
+      <p>Please feel free to contact me through any of the following links:</p> 
+      <p class="icons"><a href="https://www.facebook.com/aminapervaphotography/">
+      <img src="facebook.png" ></a><a href="https://www.instagram.com/amina_perva_arts/?hl=hr">
+      <img src="instagram.jpg"></a></p> 
+      <hr>
+</div>
+</body>
+</html>
